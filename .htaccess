@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Trust the X-Forwarded-Proto header from the Northflank load balancer
+SetEnvIf X-Forwarded-Proto "https" HTTPS=on
+
+# 1. If the request is for an actual file (like map.json or an image), serve it
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Otherwise, send EVERYTHING to index.php
+RewriteRule ^ index.php [L]
