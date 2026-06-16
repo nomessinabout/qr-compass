@@ -1,0 +1,3 @@
+qrcodes.nomessinabout.com {
+    reverse_proxy app:80
+}
